@@ -34,9 +34,9 @@ resource "google_compute_firewall" "rules" {
       destination_ranges = var.destination_ranges
     }
   }*/
-  source_ranges           = var.direction == "INGRESS" ? var.source_ranges : []
+  #source_ranges           = var.direction == "INGRESS" ? var.source_ranges : []
   source_tags             = var.direction == "INGRESS" ? var.source_tags : []
-  source_service_accounts = var.direction == "INGRESS" ? var.source_service_accounts : []
+  #source_service_accounts = var.direction == "INGRESS" ? var.source_service_accounts : []
   destination_ranges      = var.direction == "EGRESS" ? var.destination_ranges : []
   
   allow {
