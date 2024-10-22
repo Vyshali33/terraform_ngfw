@@ -7,7 +7,7 @@ resource "google_compute_firewall" "rules" {
   priority = var.priority
   #source_ranges = var.direction=="INGRESS"? var.source_ranges:null
 
-  dynamic "source_ranges" {
+ /* dynamic "source_ranges" {
     for_each = var.direction == "INGRESS" && length(var.source_ranges) >0 ? [1] : []
     content {
       source_ranges = var.source_ranges
@@ -33,7 +33,11 @@ resource "google_compute_firewall" "rules" {
     content {
       destination_ranges = var.destination_ranges
     }
-  }
+  }*/
+  source_ranges           = var.direction == "INGRESS" ? var.source_ranges : []
+  source_tags             = var.direction == "INGRESS" ? var.source_tags : []
+  source_service_accounts = var.direction == "INGRESS" ? var.source_service_accounts : []
+  destination_ranges      = var.direction == "EGRESS" ? var.destination_ranges : []
   
   allow {
     protocol  = "tcp"
