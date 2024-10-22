@@ -17,6 +17,7 @@ module "subnet" {
   name          = var.name
   ip_cidr_range = var.ip_cidr_range
   region        = var.region
-  network       = module.vpc.self_link
+  network       = module.vpc.vpc_name
   purpose       = var.purpose
+  project_id = var.project_id
 }
