@@ -19,5 +19,5 @@ module "subnet" {
   region        = var.region
   network       = module.vpc.vpc_name
   purpose       = var.purpose
-  project_id = var.project_id
+  project_id = var.project_id 
 }
