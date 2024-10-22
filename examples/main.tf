@@ -12,3 +12,11 @@ module "vpc" {
   delete_default_routes_on_create           = var.delete_default_routes_on_create
 
 }
+module "subnet" {
+  source = "../modules/subnet_module"
+  name = var.name
+  ip_cidr_range = var.ip_cidr_range
+  region = var.region
+  network = module.vpc.name
+  purpose = var.purpose
+}

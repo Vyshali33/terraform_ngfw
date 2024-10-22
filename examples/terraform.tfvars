@@ -8,3 +8,6 @@ enable_ula_internal_ipv6                  = false
 internal_ipv6_range                       = "2001:db8::/64"
 network_firewall_policy_enforcement_order = "BEFORE_CLASSIC_FIREWALL"
 delete_default_routes_on_create           = false
+ip_cidr_range = "10.0.0.0/24"
+region = "us-central1"
+purpose = "PRIVATE"

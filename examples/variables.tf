@@ -39,3 +39,15 @@ variable "delete_default_routes_on_create" {
   default = false
 
 }
+variable "ip_cidr_range"{
+    type = string
+}
+variable "region"{
+    type = string
+}
+variable "network"{
+    type = string
+}
+variable "purpose"{
+    type = string
+}

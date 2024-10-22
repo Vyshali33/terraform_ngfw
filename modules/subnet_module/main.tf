@@ -1,7 +1,8 @@
-/*resource "google_compute_subnetwork" "subnet" {
-  name          = "${var.name}-subnet" 
-  description   = "creating a subnet"    
-  ip_cidr_range = var.subnet_cidr          
+resource "google_compute_subnetwork" "subnet" {
+  name          = "${var.name}-subnet"
+  description   = "creating a subnet"
+  ip_cidr_range = var.ip_cidr_range
   region        = var.region
-  network       = google_compute_network.vpc_network.self_link
-}*/
+  network       = var.network
+  purpose       = var.purpose
+}
