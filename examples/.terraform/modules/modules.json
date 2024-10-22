@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"subnet","Source":"../modules/subnet_module","Dir":"../modules/subnet_module"},{"Key":"vpc","Source":"../modules/vpc_module","Dir":"../modules/vpc_module"}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"rule","Source":"../modules/ngfw_module","Dir":"../modules/ngfw_module"},{"Key":"subnet","Source":"../modules/subnet_module","Dir":"../modules/subnet_module"},{"Key":"vpc","Source":"../modules/vpc_module","Dir":"../modules/vpc_module"}]}

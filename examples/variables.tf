@@ -54,9 +54,6 @@ variable "purpose"{
 variable "fw_name" {
   type = string
 }
-variable "network" {
-  type = string
-}
 variable "direction" {
   description = "The direction of the firewall rule: either INGRESS or EGRESS"
   type        = string
