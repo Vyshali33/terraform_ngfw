@@ -13,10 +13,10 @@ module "vpc" {
 
 }
 module "subnet" {
-  source = "../modules/subnet_module"
-  name = var.name
+  source        = "../modules/subnet_module"
+  name          = var.name
   ip_cidr_range = var.ip_cidr_range
-  region = var.region
-  network = module.vpc.name
-  purpose = var.purpose
+  region        = var.region
+  network       = module.vpc.name
+  purpose       = var.purpose
 }
