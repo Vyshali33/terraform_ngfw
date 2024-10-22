@@ -19,5 +19,14 @@ module "subnet" {
   region        = var.region
   network       = module.vpc.vpc_name
   purpose       = var.purpose
-  project_id = var.project_id 
+  project_id    = var.project_id
+}
+module "rule" {
+  source      = "../modules/ngfw_module"
+  project_id  = var.project_id
+  fw_name     = var.fw_name
+  network     = module.vpc.vpc_name
+  direction   = var.direction
+  priority    = var.priority
+  source_tags = var.source_tags
 }

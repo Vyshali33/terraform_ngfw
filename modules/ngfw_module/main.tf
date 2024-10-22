@@ -28,11 +28,18 @@ resource "google_compute_firewall" "rules" {
     }
   }
 
+    dynamic "destination_ranges" {
+    for_each = var.direction == "EGRESS" && length(var.destination_ranges) > 0 ? [1] : []
+    content {
+      destination_ranges = var.destination_ranges
+    }
+  }
+  
   allow {
     protocol  = "tcp"
-    ports     = ["80", "8080", "1000-2000"]
+    ports     = ["80", "8080"]
   }
 
-  source_tags = ["foo"]
-  target_tags = ["web"]
+  
+  target_tags = var.target_tags
 }

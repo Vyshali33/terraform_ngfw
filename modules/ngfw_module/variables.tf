@@ -31,3 +31,11 @@ variable "source_service_accounts" {
     type = list(string)
     default = [] 
 }
+variable "destination_ranges" {
+    type = list(string)
+    default = [] 
+}
+variable "target_tags" {
+    type = list(string)
+    default = [] 
+}
