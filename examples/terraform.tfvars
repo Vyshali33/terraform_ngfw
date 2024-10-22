@@ -1,5 +1,5 @@
 name                                      = "vpc-test"
-project_id                                = "My First Project"
+project_id                                = "sunny-sunbeam-435423-i2"
 description                               = "global vpc network for test"
 auto_create_subnetworks                   = false
 routing_mode                              = "GLOBAL"
