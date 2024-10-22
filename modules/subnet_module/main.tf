@@ -5,4 +5,5 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.region
   network       = var.network
   purpose       = var.purpose
+  project       = var.project_id
 }

@@ -13,6 +13,9 @@ variable "network"{
 variable "purpose"{
     type = string
 }
-
+variable "project_id" {
+  type        = string
+  description = "name of the project"
+}
 
 
