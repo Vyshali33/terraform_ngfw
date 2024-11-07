@@ -30,3 +30,53 @@ module "rule" {
   priority    = var.priority
   source_tags = var.source_tags
 }
+
+
+
+variable "tags" {
+  type = list(object({
+    key_name        = string
+    key_description = string
+    purpose         = string
+    purpose_data    = map(string)
+    values          = list(object({
+      value_name        = string
+      value_description = optional(string, "")
+    }))
+  }))
+}
+
+# Create google_tag_key for each tag in the list
+resource "google_tag_key" "tag_keys" {
+  for_each      = { for tag in var.tags : tag.key_name => tag }
+  short_name    = each.value.key_name
+  description   = each.value.key_description
+  parent        = "organizations/1234567890" # Replace with actual organization/folder ID
+}
+
+# Create google_tag_value for each entry in values list for each tag key
+resource "google_tag_value" "values" {
+  for_each = { 
+    for tag in var.tags : tag.key_name => {
+      key_id   = google_tag_key.tag_keys[tag.key_name].id
+      values   = [for v in tag.values : {
+        value_name        = v.value_name
+        value_description = v.value_description
+      }]
+    }
+  }
+
+  # Creating each value as a unique resource by looping over the values list
+  for_each = { for i, v in each.value.values : "${each.key}-${i}" => {
+    short_name  = v.value_name
+    description = v.value_description
+    parent      = each.value.key_id
+  }}
+
+  short_name  = each.value.short_name
+  description = each.value.description
+  parent      = each.value.parent
+}
+
+
+
