@@ -122,8 +122,47 @@ resource "google_tag_value" "values" {
   }
 
   short_name  = each.value.values.value_name
-  description = each.value.values
+  description = each.value.valuesvariable "tags" {
+  type = list(object({
+    key_name        = string
+    key_description = string
+    purpose         = string
+    purpose_data    = map(string)
+    values          = list(object({
+      value_name        = string
+      value_description = optional(string, "")
+    }))
+  }))
+}
 
+# Create google_tag_key for each tag in the list
+resource "google_tag_key" "tag_keys" {
+  for_each      = { for tag in var.tags : tag.key_name => tag }
+  short_name    = each.value.key_name
+  description   = each.value.key_description
+  parent        = "organizations/1234567890" # Replace with actual organization/folder ID
+}
 
+# Flatten the tags and values list into a single map with unique keys for each google_tag_value
+locals {
+  flattened_tag_values = {
+    for tag in var.tags :
+    for idx, value in tag.values :
+    "${tag.key_name}-${value.value_name}" => {
+      short_name       = value.value_name
+      description      = try(value.value_description, "")
+      parent           = google_tag_key.tag_keys[tag.key_name].id
+    }
+  }
+}
+
+# Create google_tag_value resources for each flattened value entry
+resource "google_tag_value" "values" {
+  for_each = local.flattened_tag_values
+
+  short_name  = each.value.short_name
+  description = each.value.description
+  parent      = each.value.parent
+}
 
 
