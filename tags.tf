@@ -143,3 +143,6 @@ resource "google_tags_tag_value" "tag_value" {
 
 
 
+
+https://github.com/ashwadh1710/terraform/tree/main/modules/ngfw
+
