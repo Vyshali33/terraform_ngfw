@@ -1,0 +1,34 @@
+name: Terraform Validate
+
+on:
+  pull_request:
+    paths:
+      - '**/*.tf'
+      - '**/*.tfvars'
+      - '**/*.hcl'
+    branches:
+      - main
+
+jobs:
+  terraform-validate:
+    name: Validate Terraform Configuration
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0 # Specify the Terraform version you use
+
+      # Initialize Terraform
+      - name: Initialize Terraform
+        run: terraform init -backend=false
+
+      # Validate Terraform
+      - name: Validate Terraform Files
+        run: terraform validate
